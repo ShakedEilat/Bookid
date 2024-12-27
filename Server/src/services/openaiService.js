@@ -24,9 +24,9 @@ exports.extractDetails = async (description, structuredDetails) => {
       console.log(response);
       return response
     })
-        .catch(function (error) {
-          console.log(error);
-        });
+      .catch(function (error) {
+        console.log(error);
+      });
 
     return response.choices[0].message.content.trim();
   } catch (error) {
