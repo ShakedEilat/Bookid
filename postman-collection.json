@@ -1,0 +1,135 @@
+{
+    "info": {
+      "name": "Children book API",
+      "_postman_id": "abcd1234-5678-90ef-ghij-klmn5678",
+      "description": "Postman collection for testing the Children book API"
+    },
+    "item": [
+      {
+        "name": "Authentication",
+        "item": [
+          {
+            "name": "Login (Auth)",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\"email\": \"test@example.com\", \"password\": \"testpassword\"}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/auth/login",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["auth", "login"]
+              }
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Child Profile",
+        "item": [
+          {
+            "name": "Create Child Profile",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{jwt_token}}",
+                  "type": "text"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\"name\": \"John\", \"age\": 5, \"gender\": \"Male\", \"appearance\": \"Blonde, blue eyes\", \"preferences\": [\"Dinosaurs\", \"Superheroes\"]}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/child_profiles",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["child_profiles"]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Get Child Profile",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{jwt_token}}",
+                  "type": "text"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/child_profiles",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["child_profiles"]
+              }
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Book",
+        "item": [
+          {
+            "name": "Create Book",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{jwt_token}}",
+                  "type": "text"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\"childProfileId\": \"{{child_profile_id}}\"}"
+              },
+              "url": {
+                "raw": "http://localhost:5000/books",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["books"]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Get Book",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{jwt_token}}",
+                  "type": "text"
+                }
+              ],
+              "url": {
+                "raw": "http://localhost:5000/books/{{book_id}}",
+                "protocol": "http",
+                "host": ["localhost"],
+                "port": "5000",
+                "path": ["books", "{{book_id}}"]
+              }
+            },
+            "response": []
+          }
+        ]
+      }
+    ]
+  }  
