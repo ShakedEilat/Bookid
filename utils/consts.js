@@ -63,11 +63,10 @@ exports.DB_COLLECTIONS = {
     BOOKS: 'books',
 };
 
-// Free api key
+// Free API key
 exports.API_KEYS = {
     IMAGEBB: 'bb130c0090e85a72f8a4ea2bcd747087',
 };
-
 
 // Prompt Templates
 exports.PROMPTS = {
@@ -84,11 +83,12 @@ The style should be vibrant, colorful, and warm, similar to classic children’s
     GENERATE_ILLUSTRATIONS: (data, sceneDescription) => `Create a vibrant, colorful children's book illustration featuring ${data.name}, a ${data.age}-year-old ${data.gender} with ${data.appearance}. The child is wearing ${data.outfit}. 
 
 The illustration should depict: ${sceneDescription}. 
-    
 Keep the scene simple and uncluttered. Include only the necessary elements to convey the story visually, avoiding excessive details or background complexity. 
 
 The child should remain the central focus of the image, with consistent features and outfit across all illustrations. Use bright, soft, and vibrant colors suitable for a whimsical, magical children's book style. The image must NOT include any text or words.`,
     GENERATE_ILLUSTRATION_FALLBACK: (data) => `Create a vibrant, child-friendly and colorful children's book illustration featuring ${data.name}, a ${data.age}-year-old ${data.gender} with ${data.appearance}. The child is wearing ${data.outfit}. `,
+    
+    // Updated GENERATE_BOOK prompt with strict word count limits
     GENERATE_BOOK: (data, pages) => `
 You are a professional children's book author creating a magical, imaginative, and engaging story for kids aged around ${data.age}.
 
@@ -113,13 +113,14 @@ Resolve the story with a heartwarming ending in the final part.
 Word Count: The story should be approximately ${pages * 20} words, evenly distributed across the parts.
 
 Word Count Requirements:
-
-Total Word Count: The story must be between ${pages * 20} and ${pages * 25} words.
+- Total Word Count: The story must be between ${pages * 20} and ${pages * 25} words.
+- Each section should have no more than 25 words.
+- Ensure that the total word count does not exceed ${pages * 25} words.
 
 Formatting Rules:
 
 Begin the output with the title of the book (as the first line).
-Divide the story into exactly ${pages} distinct sections, where each section flows seamlessly into the next without explicitly marking "Part 1," "Part 2," etc. Use natural story transitions.Ensure the story ends with the line "The End!"
+Divide the story into exactly ${pages} distinct sections, where each section flows seamlessly into the next without explicitly marking "Part 1," "Part 2," etc. Use natural story transitions. Ensure the story ends with the line "The End!"
 Example Output Format:
 python
 Copy code
@@ -128,9 +129,7 @@ Copy code
 ...
 The End!
 Important:
-
-
-Do not add extra parts, summaries, or explanations beyond the requested number of parts (pages).
-Ensure each part aligns naturally with the story’s flow and ends smoothly before the next.
-    `,
+- Do not add extra parts, summaries, or explanations beyond the requested number of parts (pages).
+- Ensure each part aligns naturally with the story’s flow and ends smoothly before the next.
+`
 };
